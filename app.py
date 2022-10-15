@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from amazoncaptcha import AmazonCaptcha
 import os
 
@@ -9,13 +9,13 @@ app = Flask(__name__)
 def home():
     return "Fuck Off"
 
-@app.route('/getCapt', methods = ['POST'])
-def log():
-    link = request.form['link']
-
-    captcha = AmazonCaptcha.fromlink(link)
+@app.route('/getCapt')
+def getCapt():
+    data = request.args['link']
+    result = data[1:-1]
+    captcha = AmazonCaptcha.fromlink(result)
     solution = captcha.solve()
-    return solution
+    return jsonify({'text': solution})
 
 
 if __name__ == "__main__":
