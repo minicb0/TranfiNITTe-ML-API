@@ -1,10 +1,13 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from amazoncaptcha import AmazonCaptcha
 import os
 
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'harrish07')
+
+@app.route('/')
+def home():
+    return "Fuck Off"
 
 @app.route('/getCapt', methods = ['POST'])
 def log():
@@ -12,8 +15,8 @@ def log():
 
     captcha = AmazonCaptcha.fromlink(link)
     solution = captcha.solve()
-    return jsonify({'text' : solution})
+    return solution
 
 
 if __name__ == "__main__":
-    app.run(debug=False, host='0.0.0.0')
+    app.run()
