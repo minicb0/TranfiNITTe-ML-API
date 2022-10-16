@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Fuck Off"
+    return "This is a captcha solver api made by Trojan Titans! We also included our ML algorithms in it and we are connecting it to backend through this API."
 
 @app.route('/getCapt')
 def getCapt():
